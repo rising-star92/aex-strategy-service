@@ -1,0 +1,9 @@
+{
+  "deptNumber": 23,
+  "startYrWeek": 202530,
+  "endYrWeek": 202542,
+  "merchantAllocationsDataRequest": {
+    "merchantName": "JEFF GRIFFING",
+    "buyerPositionId": null
+  }
+}

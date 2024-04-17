@@ -1,0 +1,11 @@
+package com.walmart.aex.strategy.repository;
+
+import com.walmart.aex.strategy.entity.StrategyStyleFixture;
+import com.walmart.aex.strategy.entity.StrategyStyleFixtureId;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FixtureAllocationStyleStrategyRepository extends JpaRepository<StrategyStyleFixture, StrategyStyleFixtureId> {
+
+    void deleteStrategyStyleFixtureByStrategyStyleFixtureId_StrategyFinelineFixtureId_StrategySubCatgFixtureId_StrategyMerchCatgFixtureId_StrategyMerchCatgId_PlanStrategyId_planIdAndStrategyStyleFixtureId_StrategyFinelineFixtureId_StrategySubCatgFixtureId_StrategyMerchCatgFixtureId_StrategyMerchCatgId_lvl3NbrAndStrategyStyleFixtureId_StrategyFinelineFixtureId_StrategySubCatgFixtureId_lvl4NbrAndStrategyStyleFixtureId_StrategyFinelineFixtureId_finelineNbrAndStrategyStyleFixtureId_styleNbr(
+            Long planId, Integer lvl3Nbr, Integer lvl4Nbr, Integer finelineNbr, String styleNbr);
+}

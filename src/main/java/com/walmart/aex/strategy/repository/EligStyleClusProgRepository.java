@@ -1,0 +1,11 @@
+package com.walmart.aex.strategy.repository;
+
+import com.walmart.aex.strategy.entity.EligStyleClusProg;
+import com.walmart.aex.strategy.entity.EligStyleClusProgId;
+import com.walmart.aex.strategy.entity.PlanStrategyId;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EligStyleClusProgRepository extends JpaRepository<EligStyleClusProg, EligStyleClusProgId> {
+    void deleteEligStyleClusProgByEligStyleClusProgId_StrategyFlClusPrgmEligRankingId_StrategyFlClusEligRankingId_PlanClusterStrategyId_planStrategyIdAndEligStyleClusProgId_StrategyFlClusPrgmEligRankingId_StrategyFlClusEligRankingId_lvl3NbrAndEligStyleClusProgId_StrategyFlClusPrgmEligRankingId_StrategyFlClusEligRankingId_lvl4NbrAndEligStyleClusProgId_StrategyFlClusPrgmEligRankingId_StrategyFlClusEligRankingId_finelineNbrAndEligStyleClusProgId_styleNbr(
+            PlanStrategyId planStrategyId, Integer lvl3Nbr, Integer lvl4Nbr, Integer finelineNbr, String styleNbr);
+}

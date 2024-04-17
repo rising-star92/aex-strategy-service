@@ -1,0 +1,201 @@
+apiVersion: 2.0
+kind: ServiceConfig
+metadata:
+  serviceConfigVersion: 1.3-PROD
+  serviceId: AEX_STRATEGY_SERVICE
+  deliveryEnvironment: PROD
+  authzPolicies:
+    adminUI:
+      adminGroups:
+        - "apparel-precision-kitt"
+    git:
+      org: "ApparelPrecision"
+      repo: "aex-strategy-service"
+      branch: "main"
+  externallyReferencedServiceConfig:
+    - serviceId: AEX_SECURITY_COMMON
+      serviceConfigVersion: 1.3
+  notifications:
+    slack:
+      channel: apparel-precision-ops
+configDefinitions:
+  databaseConfig:
+    description: ""
+    resolutionPaths:
+      - default: "/envProfile/envName"
+    properties:
+      "sqlServer.url":
+        description: "AEX Strategy Service SQL Server DB URL"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "jdbc:sqlserver://aex-strategy-prd-prod-62bede24-failover-group.database.windows.net:1433;database=us_wm_aex_strategy;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;authentication=ActiveDirectoryPassword"
+      "sqlServer.driverClassName":
+        description: "SQL Server Driver Class Name"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+      "sqlServer.connection.pool.initial.size":
+        description: "Connection Pool Initial Size"
+        type: "INTEGER"
+        kind: "SINGLE"
+        defaultValue: 3
+      "sqlServer.connection.max.active":
+        description: "Max Active Connections"
+        type: "INTEGER"
+        kind: "SINGLE"
+        defaultValue: 5
+      "sqlServer.connection.timeout.ms":
+        description: "Connection Timeout in milliseconds"
+        type: "INTEGER"
+        kind: "SINGLE"
+        defaultValue: 30000
+      "sqlServer.connection.max.life.time.ms":
+        description: "Max connection lifetime in milliseconds"
+        type: "INTEGER"
+        kind: "SINGLE"
+        defaultValue: 180000
+      "sqlServer.connection.idle.timeout.ms":
+        description: "Idle connection timeout in milliseconds"
+        type: "INTEGER"
+        kind: "SINGLE"
+        defaultValue: 30000
+  appConfig:
+    description: "app Configurations"
+    resolutionPaths:
+      - default: "/envProfile/envName"
+    properties:
+      "weatherClusterStrategyId":
+        description: "weatherClusterStrategyId"
+        type: "INTEGER"
+        kind: "SINGLE"
+        defaultValue: 1
+      "fixtureStrategyId":
+        description: "fixtureStrategyId"
+        type: "INTEGER"
+        kind: "SINGLE"
+        defaultValue: 10
+      "getCluster1OffshoreList":
+        description: "exclude offshore list for cluster1"
+        type: "STRING"
+        kind: "MULTI"
+        defaultValues:
+          - "HI"
+          - "PR"
+      "getCluster7OffshoreList":
+        description: "exclude offshore list for cluster7"
+        type: "STRING"
+        kind: "MULTI"
+        defaultValues:
+          - "AK"
+      "ahsUrl":
+        description: "AHS URL"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "https://attributehelper.apparel.walmart.net/retrieveValuesByHierarchy"
+      "ahsConsumerId":
+        description: "AHS ConsumerID"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "dc9f42fa-851d-49cc-b3f6-356f6c64b24b"
+      "ahsEnv":
+        description: "AHS Env"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "prod"
+      "ahsAttributeTypes":
+        description: "List of Attributes pulled from AHS"
+        type: "STRING"
+        kind: "MULTI"
+        defaultValues:
+          - "colorFamily"
+          - "fabricConstruction"
+          - "fabricType"
+          - "fashionPyramid"
+          - "lifestyle"
+          - "newness"
+          - "patternType"
+          - "priceTier"
+          - "silhouette"
+          - "clothingSizeGroup"
+          - "brandCategory"
+          - "sizeRanges"
+      "csaUrl":
+        description: "CSA URL"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "https://mds-csa-report.walmart.com/v1/csa-service/ap-data/reserved-programs"
+      "csaEnv":
+        description: "CSA Env"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "prod"
+      "size.pack.release.flag":
+        description: "enable/disable size & pack code for UAT & PROD release"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "true"
+      "strategy.aptbls.release.flag":
+        description: "enable/disable Assort Product code for UAT & PROD release"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "true"
+      "size.pack.spread.feature.flag":
+        description: "enable/disable size & pack spread logic functionality"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "false"
+      "vd.analytics.clusterGroupDesc":
+        description: "volumeDeviationAnalyticsClusterGroupDesc"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "Volume Deviation"
+  kafkaConfig:
+    description: "Kafka Configurations"
+    resolutionPaths:
+      - default: "/envProfile/envName"
+    properties:
+      "aex.strategy.service.kafka.server":
+        description: "Kafka Broker list for AEX Strategy Service topic"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "kafka-420262885-1-1196111317.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-2-1196111320.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-3-1196111323.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-4-1196111326.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-5-1196111329.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-6-1196111332.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-7-1196111335.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-8-1196111338.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-9-1196111341.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-10-1196111344.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-11-1196111347.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-12-1196111350.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-13-1196111353.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-14-1196111356.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093,kafka-420262885-15-1196111359.scus.kafka-v2-shared1-ssl-prod.ms-df-messaging.prod-az-southcentralus-2.prod.us.walmart.net:9093"
+      "aex.strategy.service.kafka.topic":
+        description: "Kafka Topic for AEX Strategy service"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "aex_strategy_service_prod"
+  rfaGraphQlConfig:
+    description: "GraphQL Config"
+    resolutionPaths:
+      - default: "/envProfile/envName"
+    properties:
+      "rfa.space.assortproduct.url":
+        description: "Get RFA output from Assort Product Service"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "https://assortproduct.aex.prod.walmart.net/graphql"
+      "rfa.space.assortproduct.fineline.query":
+        description: "Query to retrieve RFA Fineline output"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "query ($request:RFARequest!)\n {\n getRFAFinelineSpaceAllocation(request:$request)\n {\n rfaFinelineData{\n plan_id_partition\n rpt_lvl_0_nbr\n rpt_lvl_1_nbr\n rpt_lvl_2_nbr\n rpt_lvl_3_nbr\n rpt_lvl_4_nbr\n fineline_nbr\n }}}"
+      "rfa.space.assortproduct.stylecc.query":
+        description: "Query to retrieve RFA Style and CC output"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "query ($request:RFARequest!)\n {\n getRFAStyleCcSpaceAllocation(request:$request)\n {\n rfaStylesCcData{\n plan_id_partition\n rpt_lvl_0_nbr\n rpt_lvl_1_nbr\n rpt_lvl_2_nbr\n rpt_lvl_3_nbr\n rpt_lvl_4_nbr\n fineline_nbr\n style_nbr\n customer_choice\n }}}"
+      "rfa.space.assortproduct.consumer.id":
+        description: "Consumer ID to call Assort Product"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "79be7e4b-28a6-45a9-bba5-30a6449d7b1d"
+      "rfa.space.assortproduct.consumer.name":
+        description: "Consumer svc name"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "AEX_ASSORTPRODUCT_SERVICE"
+      "rfa.space.assortproduct.consumer.env":
+        description: "Consumer Environment"
+        type: "STRING"
+        kind: "SINGLE"
+        defaultValue: "prod"

@@ -1,0 +1,164 @@
+{
+  "planId": 388,
+  "lvl3List": [
+    {
+      "lvl3Nbr": 2668,
+      "lvl4List": [
+        {
+          "lvl4Nbr": 5439,
+          "finelines": [
+            {
+              "strategy": {
+                "weatherClusters": [
+                  {
+                    "type": {
+                      "analyticsClusterId": 0,
+                      "analyticsClusterDesc": "all"
+                    },
+                    "isEligible": true,
+                    "inStoreDate": {
+                      "fiscalWeekDesc": "FYE2024WK19",
+                      "wmYearWeek": null
+                    },
+                    "markDownDate": {
+                      "fiscalWeekDesc": "FYE2024WK32",
+                      "wmYearWeek": null
+                    },
+                    "includeOffshore": [],
+                    "allocationWeeks": 14
+                  },
+                  {
+                    "type": {
+                      "analyticsClusterId": 1,
+                      "analyticsClusterDesc": "cluster 1"
+                    },
+                    "isEligible": true,
+                    "inStoreDate": {
+                      "fiscalWeekDesc": "FYE2024WK19",
+                      "wmYearWeek": null
+                    },
+                    "markDownDate": {
+                      "fiscalWeekDesc": "FYE2024WK32",
+                      "wmYearWeek": null
+                    },
+                    "includeOffshore": [
+                      "PR"
+                    ],
+                    "allocationWeeks": 14
+                  },
+                  {
+                    "type": {
+                      "analyticsClusterId": 2,
+                      "analyticsClusterDesc": "cluster 2"
+                    },
+                    "isEligible": true,
+                    "inStoreDate": {
+                      "fiscalWeekDesc": "FYE2024WK19",
+                      "wmYearWeek": null
+                    },
+                    "markDownDate": {
+                      "fiscalWeekDesc": "FYE2024WK32",
+                      "wmYearWeek": null
+                    },
+                    "includeOffshore": [
+                      "HI"
+                    ],
+                    "allocationWeeks": 14
+                  },
+                  {
+                    "type": {
+                      "analyticsClusterId": 3,
+                      "analyticsClusterDesc": "cluster 3"
+                    },
+                    "isEligible": true,
+                    "inStoreDate": {
+                      "fiscalWeekDesc": "FYE2024WK19",
+                      "wmYearWeek": null
+                    },
+                    "markDownDate": {
+                      "fiscalWeekDesc": "FYE2024WK32",
+                      "wmYearWeek": null
+                    },
+                    "includeOffshore": [],
+                    "allocationWeeks": 14
+                  },
+                  {
+                    "type": {
+                      "analyticsClusterId": 4,
+                      "analyticsClusterDesc": "cluster 4"
+                    },
+                    "isEligible": true,
+                    "inStoreDate": {
+                      "fiscalWeekDesc": "FYE2024WK19",
+                      "wmYearWeek": null
+                    },
+                    "markDownDate": {
+                      "fiscalWeekDesc": "FYE2024WK32",
+                      "wmYearWeek": null
+                    },
+                    "includeOffshore": [],
+                    "allocationWeeks": 14
+                  },
+                  {
+                    "type": {
+                      "analyticsClusterId": 5,
+                      "analyticsClusterDesc": "cluster 5"
+                    },
+                    "isEligible": true,
+                    "inStoreDate": {
+                      "fiscalWeekDesc": "FYE2024WK19",
+                      "wmYearWeek": null
+                    },
+                    "markDownDate": {
+                      "fiscalWeekDesc": "FYE2024WK32",
+                      "wmYearWeek": null
+                    },
+                    "includeOffshore": [],
+                    "allocationWeeks": 14
+                  },
+                  {
+                    "type": {
+                      "analyticsClusterId": 6,
+                      "analyticsClusterDesc": "cluster 6"
+                    },
+                    "isEligible": true,
+                    "inStoreDate": {
+                      "fiscalWeekDesc": "FYE2024WK19",
+                      "wmYearWeek": null
+                    },
+                    "markDownDate": {
+                      "fiscalWeekDesc": "FYE2024WK32",
+                      "wmYearWeek": null
+                    },
+                    "includeOffshore": [],
+                    "allocationWeeks": 14
+                  },
+                  {
+                    "type": {
+                      "analyticsClusterId": 7,
+                      "analyticsClusterDesc": "cluster 7"
+                    },
+                    "isEligible": true,
+                    "inStoreDate": {
+                      "fiscalWeekDesc": "FYE2024WK19",
+                      "wmYearWeek": null
+                    },
+                    "markDownDate": {
+                      "fiscalWeekDesc": "FYE2024WK32",
+                      "wmYearWeek": null
+                    },
+                    "includeOffshore": [
+                      "AK"
+                    ],
+                    "allocationWeeks": 14
+                  }
+                ]
+              },
+              "styles": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

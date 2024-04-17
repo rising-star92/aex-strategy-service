@@ -1,0 +1,13 @@
+{
+  "configResolution": {
+    "resolved": {
+      "sqlServer.driverClassName": "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+      "sqlServer.connection.pool.initial.size": 3,
+      "sqlServer.connection.idle.timeout.ms": 30000,
+      "sqlServer.connection.max.active": 5,
+      "sqlServer.connection.max.life.time.ms": 180000,
+      "sqlServer.url": "jdbc:sqlserver://aex-strategy-nonprod-62241612.database.windows.net:1433;database=us_wm_aex_strategy;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;authentication=ActiveDirectoryPassword",
+      "sqlServer.connection.timeout.ms": 30000
+    }
+  }
+}

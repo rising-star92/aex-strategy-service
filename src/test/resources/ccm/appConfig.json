@@ -1,0 +1,6 @@
+{"configResolution":{"resolved":{"getCluster7OffshoreList":["AK"],"getCluster1OffshoreList":["PR"],"getCluster2OffshoreList":["HI"],"weatherClusterStrategyId":1}, "ahsUrl": "https://attributehelper.apparel.dev.walmart.net/retrieveValuesByHierarchy",
+  "ahsEnv": "dev",
+  "ahsConsumerId": "b997fa4f-72e4-44a7-bf2a-cc61bf19488e",
+  "ahsAttributeTypes": ["colorFamily","fabricConstruction"],
+  "size.pack.release.flag": "true"},
+  "csaSpaceType": ["BRAND", "TRAIT"]}

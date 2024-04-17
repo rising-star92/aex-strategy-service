@@ -1,0 +1,124 @@
+schemaVersion: 1.0.0
+notify:
+  slack:
+    channelName: apparel-precision-ops
+applications:
+  - name: aex-strategy-service
+    key: AEX_STRATEGY_SERVICE
+    description: App to provide REST endpoints for AEX Strategy Service
+    organization: ApparelPrecision
+    companyCatalog: true
+    businessCriticality: MINOR
+    members:
+      - homeoffice\r0c06op
+      - homeoffice\v0r00n2
+      - homeoffice\s0y027g
+      - homeoffice\rpgibso
+      - homeoffice\h0j00fh
+      - homeoffice\a0b0bzv
+    environments:
+      - name: dev
+        type: DEVELOPMENT
+        description: AEX Strategy Service in dev cluster
+        externalCatalog: false
+        serviceType: REST
+        wcnpProximity: true
+        consumers:
+        - applicationKey: AEX-Hub-Capability-Plan-Definition
+          environment: dev
+        - applicationKey: AEX-Hub-Capability-Assort-Product
+          environment: dev
+        - applicationKey: AEX-Hub-Capability-Size-And-Pack
+          environment: dev
+        - applicationKey: aex-strategy-listener
+          environment: dev
+        - applicationKey: AEX_CURRENT_LINE_PLAN
+          environment: dev
+        - applicationKey: AEX-RFA-AP-LISTENER
+          environment: dev
+        - applicationKey: AEX_SIZE_AND_PACK
+          environment: dev
+        - applicationKey: AEX_FLOW_PLAN
+          environment: dev
+        - applicationKey: AEX_BUY_QUANTIFICATION
+          environment: dev
+        - applicationKey: OMNISAGE-EXECUTIONSERVICES
+          environment: dev
+        - applicationKey: AUTO_TRAIT_SERVICE
+          environment: dev
+        - applicationKey: aex-dataproc-service
+          environment: dev
+        consumerIdInfos:
+        - consumerId: 24773bf2-7615-46c2-badf-6eb06734d112
+          publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvkef3aCPx8I+6JYLrPHdvv9SiB4Mj4wCXEaTWlx33/J9327TWVEXLFeEkMzlIYeo3jncRdLzEZvIjnCjQJpp8wax+ZOAth8bOKv7ip3EvWMPvhJqk8c3I53bUopjU9O645LHOW1TsOVse0bAfY/nnLCkeuWgb5lfKABEOpQVbjj6/xW0EO9DH1wDwDtqUEqoh092POFYMtfK95vh2BGUceQFoVrgzxosI/38Ip1xkXK9c7noX2bhPfGl5Wvdwh/sdaFPV0oU8oMpzfRbgPxq2RCS1l+TpjeEq5ECnAnUvL11epsPJ1j8t7ZqGceTATMvwW62KeCa7eKZi74fLtgB3wIDAQAB
+      - name: stg
+        type: STAGING
+        description: AEX Strategy Service in stg cluster
+        externalCatalog: false
+        serviceType: REST
+        wcnpProximity: true
+        consumers:
+        - applicationKey: AEX-Hub-Capability-Plan-Definition
+          environment: stage
+        - applicationKey: AEX-Hub-Capability-Assort-Product
+          environment: stage
+        - applicationKey: AEX-Hub-Capability-Size-And-Pack
+          environment: stage
+        - applicationKey: aex-strategy-listener
+          environment: stg
+        - applicationKey: AEX_CURRENT_LINE_PLAN
+          environment: stg
+        - applicationKey: AEX-RFA-AP-LISTENER
+          environment: stg
+        - applicationKey: AEX_SIZE_AND_PACK
+          environment: stg
+        - applicationKey: AEX_FLOW_PLAN
+          environment: stg
+        - applicationKey: AEX_BUY_QUANTIFICATION
+          environment: stg
+        - applicationKey: AEX_LP_AP_LISTENER
+          environment: stg
+        - applicationKey: OMNISAGE-EXECUTIONSERVICES
+          environment: stg
+        - applicationKey: AUTO_TRAIT_SERVICE
+          environment: stg
+        - applicationKey: aex-dataproc-service
+          environment: stg
+        consumerIdInfos:
+        - consumerId: 644b1e93-5b03-4c09-9512-75a5b399bd61
+          publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuHC7rbyoxiNDs3Rsjo9/qhHjIG2oLIXw+eJ/UC/YfeCz7ylGzPS6pIXunAVRqy52zzDwnNCpvfdsc+AvUfJR2XVmPg0oz0TXxjeT7l9BJOY/D8KzbPfVkzKf47VdBwujrrmQABSPmGGBtVzUy5SEb2DDA2C9b+Q9MZvgDo0guRPD9AhIWvpecx/dN3O3+HNcKaZotULOmZUDZwpJBZeesAkBSObtM4ndM3Qw1ojP73EZHVwxJUijEcadAQvmHJdd0c4wfFu529UonHfkETAj6nbVS7GNQvYjLpPNSXLEYvAKYtbFunjYszkYH3suDkUb9O7Fj9XymM+MAVTYnfnRcQIDAQAB
+      - name: prod
+        type: PRODUCTION
+        description: AEX Strategy Service in prod cluster
+        externalCatalog: false
+        serviceType: REST
+        wcnpProximity: true
+        consumers:
+        - applicationKey: AEX-Hub-Capability-Plan-Definition
+          environment: prod
+        - applicationKey: AEX-Hub-Capability-Assort-Product
+          environment: prod
+        - applicationKey: AEX-Hub-Capability-Size-And-Pack
+          environment: prod
+        - applicationKey: aex-strategy-listener
+          environment: prod
+        - applicationKey: AEX_CURRENT_LINE_PLAN
+          environment: prod
+        - applicationKey: AEX-RFA-AP-LISTENER
+          environment: prod
+        - applicationKey: AEX_SIZE_AND_PACK
+          environment: prod
+        - applicationKey: AEX_FLOW_PLAN
+          environment: prod
+        - applicationKey: AEX_BUY_QUANTIFICATION
+          environment: prod
+        - applicationKey: OMNISAGE-EXECUTIONSERVICES
+          environment: prod
+        - applicationKey: AUTO_TRAIT_SERVICE
+          environment: prod
+        - applicationKey: aex-dataproc-service
+          environment: prod
+        consumerIdInfos:
+        - consumerId: 79be7e4b-28a6-45a9-bba5-30a6449d7b1d
+          publicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2U9HHbGNKO2a/kETEtd+7GcqamlMQvA7Q4/kefpR/EWqbvBSbiHzP2SskpNLmocJ+urlfI2d2Wii+GGamUohXO81/F1NJdE7p+CIOWilhWqmCLoYVHJrrd73vXlmQaOj4E+S53IXuYxk92E8PRY3M2HW6rInuAXPwTI7Q7+DPNjZ7o/4/jQxq45xGMyX/a+knYIAbmXUilcXD+tCN6GyhjwKtE+W9sMJsZFGMEYSHfvF+hsG1md0FvflChqcM2pcFZePWHZzcvKv6tzJOVtWzBikWuh23xTHmMUCi5I+voFGqDt49ESdCnBni60WaQD/tqzcEDarkuepJ1jzpfGKowIDAQAB
+

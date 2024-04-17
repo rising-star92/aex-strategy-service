@@ -1,0 +1,20 @@
+package com.walmart.aex.strategy.repository;
+
+import com.walmart.aex.strategy.entity.EligCcClusProg;
+import com.walmart.aex.strategy.entity.EligCcClusProgId;
+import com.walmart.aex.strategy.entity.PlanStrategyId;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+import java.util.Set;
+
+public interface EligCcClusProgRepository extends JpaRepository<EligCcClusProg, EligCcClusProgId > {
+
+    void deleteEligCcClusProgByEligCcClusProgId_EligStyleClusProgId_StrategyFlClusPrgmEligRankingId_StrategyFlClusEligRankingId_PlanClusterStrategyId_PlanStrategyId_planIdAndEligCcClusProgId_EligStyleClusProgId_StrategyFlClusPrgmEligRankingId_StrategyFlClusEligRankingId_lvl3NbrAndEligCcClusProgId_EligStyleClusProgId_StrategyFlClusPrgmEligRankingId_StrategyFlClusEligRankingId_lvl4NbrAndEligCcClusProgId_EligStyleClusProgId_StrategyFlClusPrgmEligRankingId_StrategyFlClusEligRankingId_finelineNbrAndEligCcClusProgId_EligStyleClusProgId_styleNbrAndEligCcClusProgId_ccId(
+            Long planId, Integer lvl3Nbr, Integer lvl4Nbr, Integer finelineNbr, String styleNbr, String ccId);
+
+    Optional<Set<EligCcClusProg>>
+    findEligCcClusProgByEligCcClusProgId_EligStyleClusProgId_StrategyFlClusPrgmEligRankingId_StrategyFlClusEligRankingId_PlanClusterStrategyId_PlanStrategyIdAndEligCcClusProgId_EligStyleClusProgId_StrategyFlClusPrgmEligRankingId_StrategyFlClusEligRankingId_finelineNbrAndEligCcClusProgId_EligStyleClusProgId_styleNbrAndEligCcClusProgId_ccIdAndEligCcClusProgId_EligStyleClusProgId_StrategyFlClusPrgmEligRankingId_ProgramId
+            (PlanStrategyId planStrategyId, Integer finelineNbr, String styleNbr, String ccId, Long programId);
+
+}

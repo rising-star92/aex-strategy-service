@@ -1,0 +1,14 @@
+{
+  "clusterGroupId": "cluster-group-id",
+  "isSuccess": true,
+  "clusters": [
+    {
+      "clusterId": "8f5e2f6d-bd52-423d-b638-30d40889b758",
+      "clusterName": "A"
+    },
+    {
+      "clusterId": "8f5e2f6d-bd52-423d-b638-30d40889b999",
+      "clusterName": "B"
+    }
+  ]
+}

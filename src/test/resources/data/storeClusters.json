@@ -1,0 +1,41 @@
+[
+  {
+    "appName": "aex-fashion",
+    "eventId": "102-REEBOK",
+    "clusterType": "program",
+    "clusterAttributes": {
+      "planId": "102",
+      "modcat": "1010"
+    },
+    "sourceStoreList": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "userId": "v0r00n2",
+    "clusters": [
+      {
+        "clusterName": "A",
+        "storeList": [
+          1,
+          2,
+          3
+        ]
+      },
+      {
+        "clusterName": "B",
+        "storeList": [
+          4,
+          5,
+          6
+        ]
+      }
+    ]
+  }
+]

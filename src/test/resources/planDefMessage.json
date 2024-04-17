@@ -1,0 +1,71 @@
+{
+  "payload": {
+    "planId": 323,
+    "planDesc": "S4 - FYE 2024",
+    "fiscalYear": 2024,
+    "fiscalYearDesc": "FYE 2024",
+    "planHierarchy": {
+      "lvl0Nbr": 50000,
+      "lvl0GenDesc1": "Apparel",
+      "lvl1": [
+        {
+          "lvl1Nbr": 23,
+          "lvl1GenDesc1": "D23 - Mens Apparel",
+          "lvl2": [
+            {
+              "lvl2Nbr": 1055400,
+              "lvl2GenDesc1": "Activewear Ecomm Mens",
+              "lvl3": [
+                {
+                  "lvl3Nbr": 1055401,
+                  "lvl3GenDesc1": "Tops Activewear Ecomm Mens",
+                  "strategy": {
+                    "weatherClusters": null,
+                    "fixture": null,
+                    "sizeProfile": [
+                      {
+                        "type": {
+                          "analyticsClusterId": 0,
+                          "analyticsClusterDesc": "all"
+                        },
+                        "ahsSizeId": 229,
+                        "sizeDesc": "S/M",
+                        "sizeProfilePrcnt": null,
+                        "adjustedSizeProfile": null,
+                        "isEligible": 0
+                      }]},
+                  "lvl4": [
+                    {
+                      "lvl4Nbr": 1055402,
+                      "lvl4GenDesc1": "Fleece Tops Active Ec Mens"
+                    },
+                    {
+                      "lvl4Nbr": 1055403,
+                      "lvl4GenDesc1": "Jackets Tops Active Ec Mens"
+                    },
+                    {
+                      "lvl4Nbr": 1055404,
+                      "lvl4GenDesc1": "Ls Tops Active Ec Mens"
+                    },
+                    {
+                      "lvl4Nbr": 1055405,
+                      "lvl4GenDesc1": "Slvls Tops Active Ec Mens"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "headers": {
+    "kafka_timestamp": 1650490782,
+    "source": "AEX Season Plan",
+    "id": "e9e327ed-cb10-8253-4af4-424c2e5184cf",
+    "type": "PLAN_DEFINITION_CREATE",
+    "domain": "cbam-plan-definition",
+    "timestamp": 1650490782313
+  }
+}

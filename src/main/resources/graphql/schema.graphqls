@@ -1,0 +1,947 @@
+type Query {
+    getClusterEligRankingByPlan(planId: Int!): PlanStrategyResponse!
+    getCcClusterEligRankingByPlanFl(planStrategyRequest: PlanStrategyRequest!): PlanStrategyResponse!
+    getProgramEligRankingByPlan(planId: Int!, programId: Int!): PlanStrategyResponse!
+    getProgramCcClusterEligRankingByPlanFl(planStrategyRequest: PlanStrategyRequest!, programId: Int): PlanStrategyResponse!
+    fetchAttributeStrategy(request: LinePlanStrategyRequest!): LinePlanStrategyResponse!
+    getAllocationRulesByPlan(planId: Int!): PlanStrategyResponse!
+    getAllocationRulesByCatgAndSubCatg(planStrategyRequest: PlanStrategyRequest!): PlanStrategyResponse!
+    getCcAllocationRulesByCatgSubCatgAndFl(planStrategyRequest: PlanStrategyRequest!): PlanStrategyResponse!
+    getPresentationUnitByPlan(planId: Int!): PlanStrategyResponse!
+    getTraitProgramsByPlanId(planId: Int!): ProgramTraitsResponse!
+    getPresentationUnitByCatgAndSubCatg(planStrategyRequest: PlanStrategyRequest!): PlanStrategyResponse!
+    getCategoryHierarchyByPlanId(planId : Int!, channel : String!) : PlanStrategySP!
+    getCcByFineline(planId: Int!, channel: String!, finelineNbr: Int!) : PlanStrategySP!
+    getMerchMethodFixtureByPlanId(planId : Int!, planDesc : String! ) : SPMerchMethodFixtureResponse!
+    getVolumeDeviationStrategySelection(request : VolumeDeviationFinelineRequest): VolumeDeviationFinelineResponse!
+    getFineLinesSizeClus(sizeProfileRequest: SizeProfileRequest): PlanSizeProfile!
+    getStylesSizeClus(sizeProfileRequest: SizeProfileRequest): PlanSizeProfile!
+    getCcSizeClus(sizeProfileRequest: SizeProfileRequest): PlanSizeProfile!
+    getAllCcSizeClus(sizeProfileRequest: SizeProfileRequest): PlanSizeProfile!
+    getStylesCCsWithSizeAssociation(planId: Int!, channel: String!, finelineNbr: Int!) : PlanStrategySP!
+    getFinelinesWithSizeAssociation(planId : Int!, channel : String!): PlanStrategySP!
+    getCcByFinelineWithoutSizeAssociation(planId: Int!, channel: String!, finelineNbr: Int!) : PlanStrategySP!
+    getFinelineWithoutSizeAssociation(planId: Int!, channel: String!) : PlanStrategySP!
+    getFinelinesForSeasonCatg(request: StrongKeyFlatInput!): GetFinelinesResponse!
+    isRfaDefaultMinMaxCapValid(planId: Int!): RFAMinMaxValidationResponse!
+    isRfaDefaultMinMaxCapRulesValid(planStrategyRequest: PlanStrategyRequest!): RFAMinMaxValidationResponse!
+    getFinelineRank(request: RankRequest!): RankResponse!
+    getCcRank(request: RankRequest!): RankResponse!
+    getRFAAllocationTypes: RFAStatusDataResponse!
+    getRunRFAStatusByPlan(planId: Int!): PlanStrategyResponse!
+}
+
+type Mutation {
+    updateClusterEligibilityMetrics(request: PlanStrategyRequest!): PlanStrategyResponse
+    updateLinePlanStrategyTargetCount(request: LinePlanStrategyUpdateRequest!) : StrategyUpdateResponse!
+    updatePrgClusterEligibilityMetrics(request: PlanStrategyRequest!, programId: Int): PlanStrategyResponse
+    updateLinePlanStrategyAttributeGroup(request: LinePlanStrategyUpdateAttributeRequest!) : LinePlanStrategyAttributeGrpResponse!
+    updateFixtureAllocationMetrics(request: PlanStrategyRequest!): PlanStrategyResponse
+    updatePresentationUnitMetrics(request: PlanStrategyRequest!): PlanStrategyResponse
+    createMerchMethodFixture(request: SPMerchMethodFixtureRequest!): SPMerchMethodFixtureResponse!
+    updateSizeAssociation(request: UpdateSizeAssociationRequest!, channel: String!): UpdateAdjSizeProfileResponse!
+    updateFinelineAdjSizeProfilePct(request: UpdateFinelineAdjSizeProfileRequest!): PlanSizeProfile!
+    updateStyleSPClusAdjSizeProfilePct(request: UpdateStyleAdjSizeProfileRequest!): PlanSizeProfile!
+    updateCustomerChoiceAdjSizeProfilePct(request: UpdateCustomerChoicesAdjSizeProfileRequest!): PlanSizeProfile!
+    updateSpreadSizeProfilePercentage(request: SpreadSizeProfileRequest!): SpreadSizeProfileResponse!
+    fetchAndUpdateFinelineMetrics(request: StrongKeyFlatInput!): FinelineMetricsResponse
+    analyticsTrigger(request: StrongKeyFlatInput!): Boolean!
+    deleteProgramByProgramId(programId: Int!) : ProgramResponseDTO!
+    updateAndFetchFineLineRFAStatus(request: PlanStrategyRequest!): PlanStrategyResponse
+}
+
+enum IncludeOffshoreMkt{
+    PR
+    AK
+    HI
+}
+
+input StrongKeyFlatInput{
+              fiscalYear: Int!
+              seasonCode: String!
+              planId: Int
+              strategyId: Int
+              stratGroupTypeId: Int
+              lvl0Nbr: Int
+              lvl1Nbr: Int
+              lvl2Nbr: Int!
+              lvl3Nbr: Int
+              lvl4Nbr: Int
+              finelineNbr: Int
+      }
+
+type StrongKeyFlat{
+        fiscalYear: Int
+        seasonCode: String
+        planId: Int
+        strategyId: Int
+        lvl0Nbr: Int
+        lvl1Nbr: Int
+        lvl2Nbr: Int
+        lvl3Nbr: Int
+        lvl4Nbr: Int
+        finelineNbr: Int
+}
+
+input UpdateAll{
+   updatedFields: UpdatedFields
+}
+
+input PlanStrategyRequest{
+    planId: Int!
+    lvl3List: [Lvl3Input!]!
+    all: UpdateAll
+}
+
+input LinePlanStrategyRequest {
+    planId: Int!
+    planDesc: String!
+    channel: String!
+    attribute: String
+    strategyType: StrategyType
+}
+
+input StrategyType {
+    strategyId: Int
+    strategyDesc: String
+}
+
+input LinePlanStrategyUpdateRequest {
+    planId: Int!
+    planDesc: String!
+    strategyType: StrategyType!
+    lvl0Nbr: Int!
+    channel: String!
+    all: AllInput
+    lvl1List: [Lvl1Input]
+}
+
+input AllInput {
+    updatedFields: [Field]
+}
+
+input Lvl1Input {
+    lvl1Nbr: Int!
+    lvl2List: [Lvl2Input]
+}
+
+input Lvl2Input {
+    lvl2Nbr: Int!
+    lvl3List: [Lvl3InputLP]
+}
+
+input Lvl3InputLP {
+    lvl3Nbr: Int!
+    updatedFields: [Field]
+    lvl4List: [Lvl4InputLP]
+}
+
+input Lvl4InputLP {
+    lvl4Nbr: Int!
+    updatedFields: [Field]
+}
+
+input LinePlanStrategyUpdateAttributeRequest{
+    planId: Int!
+    strategyType: StrategyType
+    planDesc: String!
+    lvl0Nbr: Int!
+    channel: String!
+    lvl1List: [Lvl1AttributeGrpInput]
+}
+
+input Lvl1AttributeGrpInput {
+    lvl1Nbr: Int!
+    lvl2List: [Lvl2AttributeGrpInput]
+}
+
+input Lvl2AttributeGrpInput {
+    lvl2Nbr: Int!
+    lvl3List: [Lvl3AttributeGrpInput]
+}
+
+input Lvl3AttributeGrpInput {
+    lvl3Nbr: Int!
+    updatedFields: [AttributeFields]
+    lvl4List: [Lvl4AttributeGrpInput]
+}
+
+input Lvl4AttributeGrpInput {
+    lvl4Nbr: Int!
+    updatedFields: [AttributeFields]
+}
+
+input AttributeFields {
+    attributeGroupName: String!
+    attribute: String!
+    name: String!
+    count: Int!
+}
+
+type ProgramResponseDTO{
+    programMappings: [ProgramMappings]
+    status: String!
+    error: String
+}
+
+type ProgramMappings{
+    programType: String
+    sourceId: Int
+    programId: Int
+    programName: String
+    error: String
+}
+
+type LinePlanStrategyAttributeGrpResponse{
+    planId: Int!
+    planDesc: String!
+}
+
+type FinelineMetricsResponse{
+    status: String
+}
+
+type RFAMinMaxValidationResponse{
+    isCCRulesValid: Boolean!
+    isFinelineRulesValid: Boolean!
+    status: String!
+    errorMessage: String
+}
+
+type LinePlanStrategyResponse {
+    planId: Int!
+    planDesc: String!
+    lvl0Nbr: Int!
+    lvl0Name: String
+    all: AllLvl
+    lvl1List: [Lvl1]
+}
+
+type StrategyUpdateResponse {
+    status: String
+}
+
+type PlanStrategyResponse{
+    planId: Int
+    fixtureStrategyId: Int
+    weatherClusterStrategyId: Int
+    seasonCode: String
+    fiscalYear: Int
+    lvl0Nbr: Int
+    lvl1Nbr: Int
+    lvl2Nbr: Int
+    lvl3List: [Lvl3]
+    status: String
+}
+
+type GetFinelinesResponse{
+    payload: [StrongKeyFlat]
+    status: String
+    errorMessage: String
+}
+
+type ProgramTraitsResponse{
+    trait: [Trait]
+    status: String
+    message: String
+}
+
+input Lvl3Input {
+    lvl3Nbr: Int!
+    lvl3Name: String
+    updatedFields: UpdatedFields
+    strategy: StrategyInput
+    lvl4List: [Lvl4Input]
+}
+
+input UpdateFinelineAdjSizeProfileRequest{
+    planId:Int!
+    channel:String!
+    fineline:Int!
+    clusterId:Int!
+    adjSizePct:Float!
+    ahsSizeId:Int!
+}
+
+input UpdateStyleAdjSizeProfileRequest {
+	planId: Int!
+	channel: String!
+	fineline: Int!
+	style: String!
+	clusterId: Int!
+	ahsSizeId: Int!
+	adjSizePct: Float
+}
+
+input UpdateCustomerChoicesAdjSizeProfileRequest{
+    planId:Int!  
+	channel:String!
+	style:String!
+	clusterId:Int!
+    finelineNbr:Int! 
+    adjSizePct:Float!
+    ahsSizeId:Int!
+    customerChoice:String!
+}
+
+input SpreadSizeProfileRequest{
+    planId:Int!
+	channel:String!
+}
+
+type UpdateAdjSizeProfileResponse {
+	status: String!
+}
+
+type SpreadSizeProfileResponse {
+	status: String!
+}
+
+type AllLvl {
+    strategy: Strategy
+}
+
+type Lvl1 {
+    lvl1Nbr: Int
+    lvl1Name: String
+    lvl2List: [Lvl2]
+}
+
+type Lvl2 {
+    lvl2Nbr: Int
+    lvl2Name: String
+    strategy: Strategy
+    lvl3List: [Lvl3]
+}
+
+type Lvl3 {
+    lvl3Nbr: Int
+    lvl3Name: String
+    strategy: Strategy
+    lvl4List: [Lvl4]
+}
+
+input Lvl4Input {
+    lvl4Nbr: Int!
+    lvl4Name: String
+    updatedFields: UpdatedFields
+    strategy: StrategyInput
+    finelines: [FinelineInput]
+}
+
+type Lvl4 {
+    lvl4Nbr: Int
+    lvl4Name: String
+    strategy: Strategy
+    finelines: [Fineline]
+}
+
+input FinelineInput {
+    finelineNbr: Int!
+    finelineName: String
+    altFinelineName: String
+    channel: String
+    traitChoice: String
+    updatedFields: UpdatedFields
+    strategy: StrategyInput
+    styles:[StyleInput]
+}
+
+type Fineline {
+    finelineNbr: Int
+    finelineName: String
+    altFinelineName: String
+    channel: String
+    traitChoice: String
+    outFitting: String
+    strategy: Strategy
+    styles:[Style]
+    finelineRank: Int
+    allocRunStatus: RFAStatusDataDTO
+    runStatus: RFAStatusDataDTO
+    rfaStatus: RFAStatusDataDTO
+    brands: [Brands]
+}
+
+input StyleInput {
+    styleNbr: String
+    channel: String
+    updatedFields: UpdatedFields
+    customerChoices:[CustomerChoiceInput]
+}
+
+type Style {
+    styleNbr: String
+    channel: String
+    customerChoices:[CustomerChoice]
+}
+
+input CustomerChoiceInput {
+    ccId: String
+    altCcDesc: String
+    colorName: String
+    channel: String
+    updatedFields: UpdatedFields
+    strategy: StrategyInput
+}
+
+input UpdatedFields {
+    weatherCluster: [Field]
+    fixture: [Field]
+    presentationUnits: [Field]
+    runRfaStatus: [Field]
+}
+
+type CustomerChoice {
+    ccId: String
+    altCcDesc: String
+    colorName: String
+    channel: String
+    strategy: Strategy
+}
+
+input StrategyInput {
+    weatherClusters: [WeatherClustersInput]
+    fixture: [FixtureInput]
+    presentationUnits: [PresentationUnitInput]
+}
+
+type Strategy {
+    weatherClusters: [WeatherClusters]
+    fixture: [Fixture]
+    presentationUnits: [PresentationUnit]
+    linePlan: LinePlan
+}
+
+input WeatherClustersInput {
+    type: ClusterTypeInput
+    isEligible: Boolean
+    location: String
+    trait: [TraitInput]
+    storeCount: Int
+    allocationWeeks: Int
+    inStoreDate: FiscalWeekInput
+    markDownDate: FiscalWeekInput
+    includeOffshore: [IncludeOffshoreMkt]
+    lySales: Float
+    lyUnits: Int
+    onHandQty: Int
+    salesToStockRatio: Float
+    forecastedSales: Float
+    forecastedUnits: Int
+    ranking: Int
+    algoClusterRanking: Int
+}
+
+type WeatherClusters {
+    type: ClusterType
+    isEligible: Boolean
+    isEligibleFlag: Int
+    location: String
+    trait: [Trait]
+    storeCount: Int
+    allocationWeeks: Int
+    inStoreDate: FiscalWeek
+    markDownDate: FiscalWeek
+    includeOffshore: [IncludeOffshoreMkt]
+    lySales: Float
+    lyUnits: Int
+    onHandQty: Int
+    salesToStockRatio: Float
+    forecastedSales: Float
+    forecastedUnits: Int
+    ranking: Int
+    algoClusterRanking: Int
+}
+
+input FixtureInput{
+    defaultMinCap: Float
+    defaultMaxCap: Float
+    orderPref: Int
+    type: String
+    belowMin: Float
+    belowMax: Float
+    fgStart: Int
+    fgEnd: Int
+    fgMin: Float
+    fgMax: Float
+    maxCcs: Int
+    adjMaxCc: Float
+}
+
+type Fixture{
+    defaultMinCap: Float
+    defaultMaxCap: Float
+    orderPref: Int
+    type: String
+    belowMin: Float
+    belowMax: Float
+    fgStart: Int
+    fgEnd: Int
+    fgMin: Float
+    fgMax: Float
+    maxCcs: Int
+    adjMaxCc: Float
+}
+
+input PresentationUnitInput{
+    type: String
+    min: Int
+    max: Int
+}
+
+type PresentationUnit{
+    type: String
+    min: Int
+    max: Int
+}
+
+type LinePlan {
+    current: LinePlanAttributes
+    lyActuals: LinePlanAttributes
+    llyActuals: LinePlanAttributes
+}
+
+type LinePlanAttributes {
+    finelineCount: Int
+    customerChoiceCount: Int
+    attributeGroups: [AttributeObj]
+}
+
+type AttributeObj {
+    attributeGroupName: String
+    goal: AttributeWrapper
+}
+
+type AttributeWrapper {
+    finelineAttribute: [Attribute]
+    customerChoiceAttribute: [Attribute]
+}
+
+type Attribute {
+    name: String
+    count: Int
+    percentage: Int
+}
+
+
+input ClusterTypeInput{
+    analyticsClusterId: Int
+    analyticsClusterDesc: String
+}
+
+type ClusterType{
+    analyticsClusterId: Int
+    analyticsClusterDesc: String
+}
+
+input TraitInput{
+    programId: Int
+    programName: String
+}
+
+type Trait{
+    programId: Int
+    programName: String
+}
+
+input FiscalWeekInput{
+    wmYearWeek: Int
+    dwWeekId: Int
+    fiscalWeekDesc: String
+}
+
+type FiscalWeek{
+    wmYearWeek: Int
+    dwWeekId: Int
+    fiscalWeekDesc: String
+}
+
+input Field {
+    key: String
+    value: String
+}
+
+type StrategyCountResponse{
+    finelineOnlineTarget: Int
+    finelineStoreTarget: Int
+    ccOnlineTarget: Int
+    ccStoreTarget: Int
+    finelineOnlineActual: Int
+    finelineStoreActual: Int
+    ccOnlineActual: Int
+    ccStoreActual: Int
+}
+
+input UpdateSizeAssociationRequest{
+    planId : Int
+    lvl0Nbr: Int
+    lvl1Nbr: Int
+    lvl2Nbr: Int
+    lvl3List:[SPLvl3Input]
+}
+
+input SPLvl3Input {
+    lvl3Nbr: Int
+    lvl3Name: String
+    fixtureTypes: [SPMerchMethFixture]
+    updatedSizes: SPUpdatedSizesInput
+    lvl4List: [SPLvl4Input]
+}
+
+input SPLvl4Input{
+    lvl4Nbr: Int
+    lvl4Name: String
+    fixtureTypes: [SPMerchMethFixture]
+    updatedSizes: SPUpdatedSizesInput
+    finelines: [SPFinelineInput]
+}
+
+input SPFinelineInput{
+    finelineNbr: Int
+    finelineName: String
+    fixtureTypes: [SPMerchMethFixture]
+    updatedSizes: SPUpdatedSizesInput
+    styles: [SPStyleInput]
+}
+
+input SPStyleInput{
+    styleNbr: String
+    updatedSizes: SPUpdatedSizesInput
+    customerChoices: [SPCustomerChoiceInput]
+}
+
+input SPCustomerChoiceInput{
+    ccId : String
+    updatedSizes: SPUpdatedSizesInput
+}
+
+input SPUpdatedSizesInput {
+    sizes: [Field]
+}
+
+input SPMerchMethodFixtureRequest{
+    planId: Int
+    planDesc: String
+    lvl0Nbr: Int
+    lvl0Desc: String
+    lvl1Nbr: Int
+    lvl1Desc: String
+    lvl2Nbr: Int
+    lvl2Desc: String
+    lvl3List: [SPMerchMethLvl3]
+}
+
+input SPMerchMethLvl3{
+    lvl3Nbr: Int
+    lvl3Desc: String
+    fixtureTypes: [SPMerchMethFixture]
+    lvl4List: [SPMerchMethLvl4]
+}
+
+input SPMerchMethLvl4{
+    lvl4Nbr: Int
+    lvl4Desc: String
+    fixtureTypes: [SPMerchMethFixture]
+    finelines: [SPMerchMethFineline]
+}
+
+input SPMerchMethFixture{
+    merchMethodCode: Int
+    fixtureTypeRollupId: Int
+}
+
+input SPMerchMethFineline{
+    finelineNbr: Int
+    finelineDesc: String
+    fixtureTypes: [SPMerchMethFixture]
+}
+
+type SPMerchMethodResponse{
+    status: String
+    message:String
+}
+
+type PlanStrategySP{
+    planId : Int
+    lvl0Nbr: Int
+    lvl1Nbr: Int
+    lvl2Nbr: Int
+    lvl3List: [Lvl3SP]
+    status: String
+}
+
+type Lvl3SP{
+    lvl3Nbr : String
+    lvl3Name : String
+    strategy : StrategySP
+    lvl4List : [Lvl4SP]
+}
+
+type Lvl4SP{
+    lvl4Nbr : String
+    lvl4Name : String
+    strategy : StrategySP
+    finelines : [FinelineSP]
+
+}
+
+type FinelineSP{
+    finelineNbr : Int
+    finelineName : String
+    altFinelineName : String
+    strategy : StrategySP
+    styles : [StyleSP]
+    metadata : Metadata
+}
+
+type StyleSP{
+    styleNbr : String
+    altStyleDesc : String
+    customerChoices : [CustomerChoiceSP]
+    metadata : Metadata
+}
+
+type CustomerChoiceSP{
+    ccId : String
+    altCcDesc : String
+    colorFamily : String
+    colorName : String
+    strategy : StrategySP
+    metadata : Metadata
+}
+
+type Metadata {
+    validationData: ValidationData
+}
+
+type ValidationData {
+    merchMethodCodeList: [Int]
+    sizeProfilePctList: [Int]
+}
+
+type StrategySP{
+    sizeProfile : [SizeSP]
+}
+
+type SizeSP{
+    ahsSizeId : Int
+    sizeDesc : String
+    sizeProfilePrcnt : Float
+    adjustedSizeProfile : Float
+    isEligible : Int
+}
+
+type SPMerchMethodFixtureResponse{
+    planId: Int
+    planDesc: String
+    lvl0Nbr: Int
+    lvl0Desc: String
+    lvl1Nbr: Int
+    lvl1Desc: String
+    lvl2Nbr: Int
+    lvl2Desc: String
+    lvl3List: [SPMerchMethLvl3Response]
+}
+
+type SPMerchMethLvl3Response{
+    lvl3Nbr: Int
+    lvl3Desc: String
+    fixtureTypes: [SPMerchMethFixtureResponse]
+    lvl4List: [SPMerchMethLvl4Response]
+}
+
+type SPMerchMethLvl4Response{
+    lvl4Nbr: Int
+    lvl4Desc: String
+    fixtureTypes: [SPMerchMethFixtureResponse]
+    finelines: [SPMerchMethFinelineResponse]
+}
+
+type SPMerchMethFixtureResponse {
+    merchMethodCode: Int
+    fixtureTypeRollupId: Int
+    merchMethodDesc: String
+    fixtureType: String
+}
+
+type SPMerchMethFinelineResponse {
+    finelineNbr: Int
+    finelineDesc: String
+    altFinelineName: String
+    fixtureTypes: [SPMerchMethFixtureResponse]
+}
+
+type VolumeDeviationFinelineResponse {
+   finelines: [VDFinelinesResponse]
+}
+
+type VDFinelinesResponse {
+    totalRecords: Int
+    from: Int
+    size: Int
+    finelineId: Int
+    finelineName: String
+    lvl0Nbr: Int
+    lvl1Nbr: Int
+    lvl2Nbr: Int
+    lvl3Nbr: Int
+    lvl4Nbr: Int
+    planId: Int
+    volumeDeviationLevel : String
+}
+
+input VolumeDeviationFinelineRequest {
+     volumeDeviationRequestsList: [VolumeDeviationRequests]
+
+}
+
+input VolumeDeviationRequests{
+    planId: Int
+    finelineNbr: [Int]
+}
+
+input SizeProfileRequest{
+    planId: Int!
+    planDesc: String
+    channel: String!
+    lvl3Nbr: Int
+    lvl4Nbr: Int
+    finelineNbr: Int
+    styleNbr: String
+    ccId: String
+}
+
+type PlanSizeProfile {
+     planId: Int
+     planDesc: String
+     lvl0Nbr: Int
+     lvl0Desc: String
+     lvl1Nbr: Int
+     lvl1Desc: String
+     lvl2Nbr: Int
+     lvl2Desc: String
+     channelId: Int
+     channelDesc: String
+     lvl3List: [Lvl3List]
+}
+
+type Lvl3List {
+    lvl3Nbr: Int
+    lvl3Desc: String
+   	lvl4List: [Lvl4List]
+   	}
+
+type Lvl4List {
+    lvl4Nbr: Int
+    lvl4Desc: String
+    finelines: [FineLine]
+}
+
+type FineLine {
+    finelineNbr: Int
+    finelineDesc: String
+    metrics: Metrics
+    metadata: Metadata
+    clusters: [ClusterDto]
+    styles: [StyleDto]
+    merchMethods: [MerchMethodsDto]
+}
+
+type MerchMethodsDto {
+    fixtureType: String
+    fixtureTypeRollupId: Int
+    merchMethod: String
+    merchMethodCode: Int
+}
+
+type StyleDto  {
+    styleNbr: String
+    metrics: Metrics
+    metadata: Metadata
+    clusters: [ClusterDto]
+    customerChoices: [CustomerChoiceList]
+}
+
+type CustomerChoiceList {
+    ccId: String
+	colorFamily: String
+    metrics: Metrics
+    clusters: [ClusterDto]
+    metadata : Metadata
+}
+
+type ClusterDto {
+    clusterID: Int
+    sizes: [SizeList]
+    totalSizeProfilePct: Float
+}
+
+type SizeList {
+    ahsSizeId: Int
+    sizeDesc: String
+    metrics: Metrics
+}
+
+type Metrics {
+    sizeProfilePct: Float
+	adjSizeProfilePct: Float
+    avgSizeProfilePct: Float
+	adjAvgSizeProfilePct: Float
+	buyQty: Int
+	finalBuyQty: Int
+	finalInitialSetQty: Int
+	finalReplenishmentQty: Int
+}
+
+input RankRequest {
+    planId: [Int]!
+    lvl0Nbr: [Int]
+    lvl1Nbr: [Int]
+    lvl2Nbr: [Int]
+    lvl3Nbr: [Int]
+    lvl4Nbr: [Int]
+    finelineNbr: Int
+    styleNbr: String
+    ccNo: String
+    channelId: Int
+}
+
+type RankResponse {
+    flAndCcRankData: [FlAndCcRankData]
+}
+
+type FlAndCcRankData {
+    planId: Int
+    lvl0Nbr: Int
+    lvl1Nbr: Int
+    lvl2Nbr: Int
+    lvl3Nbr: Int
+    lvl4Nbr: Int
+    finelineNbr: Int
+    flRank: Int
+    flAlgoRank: Int
+    flMerchantOverWrittenRank: Int
+    ccRank: Int
+    ccMerchantOverWrittenRank: Int
+    styleNbr: String
+    customerChoice: String
+}
+
+type RFAStatusDataDTO {
+   code: Int
+   description: String
+}
+
+type RFAStatusDataResponse {
+    rfaStatusList: [RFAStatusDataDTO]
+    status: String
+}
+
+type Brands {
+   brandId: Int
+   brandLabelCode: String
+   brandName: String
+   brandType: String
+}
+
